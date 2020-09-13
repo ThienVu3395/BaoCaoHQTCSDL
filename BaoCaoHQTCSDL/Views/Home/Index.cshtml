@@ -1,0 +1,45 @@
+﻿@using BaoCaoHQTCSDL.Models
+@model ProductModel
+@{
+    List<ProductModel> productList = ViewBag.Product;
+    ViewBag.Title = "Home Page";
+    ProductModel createProductModel = new ProductModel();
+}
+
+<div class="jumbotron">
+    <h1>DEMO MÔN "CÁC HỆ QUẢN TRỊ CƠ SỞ DỮ LIỆU"</h1>
+</div>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Category</th>
+            <th>
+                <button type="button" class="btn btn-success" ng-click="opennewVanban(0,null)">Add New Product</button>
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr ng-repeat="item in dsSP track by $index">
+            <td>{{item.ProductName}}</td>
+            <td>{{item.CategoryName}}</td>
+            <td>
+                <div class="btn-group">
+                    <div class="btn btn-warning" ng-click="opennewVanban(1,item.Id)">Detail</div>
+                    <div class="btn btn-info" ng-click="opennewVanban(2,item.Id)">Edit</div>
+                    <div class="btn btn-danger" ng-click="xoasp(item.Id)">Delete</div>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<script type="text/ng-template" id="FormCRUD.html">
+    @Html.Partial("~/Views/Home/FormCRUD.cshtml")
+</script>
+
+<script src="~/MyScript/CrudController.js"></script>
+
+

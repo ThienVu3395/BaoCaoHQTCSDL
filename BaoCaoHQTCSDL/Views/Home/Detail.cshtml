@@ -1,0 +1,27 @@
+﻿@using BaoCaoHQTCSDL.Models
+@{
+    ProductModel testModel = ViewBag.test;
+}
+
+<!-- Modal Header -->
+<div class="modal-header">
+    <h4 class="modal-title">Thông Tin Sản Phẩm</h4>
+</div>
+
+<!-- Modal body -->
+<div class="modal-body">
+    <div class="form-group">
+        <label>Product Name:</label>
+        <div class="form-control">@(testModel?.ProductName)</div>
+    </div>
+
+    <div class="form-group">
+        <label>Category :</label>
+        @Html.DropDownList("Category", null, new { type = "text", @class = "form-control" })
+    </div>
+</div>
+
+<!-- Modal footer -->
+<div class="modal-footer">
+    <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+</div>

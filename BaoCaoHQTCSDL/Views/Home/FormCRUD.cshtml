@@ -1,0 +1,49 @@
+﻿@{
+    Layout = null;
+}
+
+<div ng-show="status == 0">
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">Add New Product</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <div class="form-group">
+            <label>Product Name:</label>
+            <input type="text" class="form-control" placeholder="Enter Product Name" ng-model="ProductName">
+        </div>
+
+        <div class="form-group">
+            <label>Category :</label>
+            <select class="form-control" ng-model="Cate" ng-options="item as item.Name for item in $ctrl.dsCate track by item.Id"></select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-success" ng-click="ThemMoi()">Add</button>
+    </div>
+</div>
+
+<div ng-show="status == 1 || status == 2">
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title" ng-show="status == 1">Product Detail</h3>
+        <h3 class="modal-title" id="modal-title" ng-show="status == 2">Edit Product Detail</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <div class="form-group">
+            <label>Product Name:</label>
+            <input type="text" class="form-control" placeholder="Enter Product Name" ng-model="$ctrl.sp.ProductName">
+        </div>
+
+        <div class="form-group">
+            <label>Category :</label>
+            <select 
+                    class="form-control" 
+                    ng-model="Cate"
+                    ng-options="item as item.Name for item in $ctrl.dsCate track by item.Id">
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-success" ng-show="status == 2" ng-click="CapNhat()">Update</button>
+    </div>
+</div>
+
