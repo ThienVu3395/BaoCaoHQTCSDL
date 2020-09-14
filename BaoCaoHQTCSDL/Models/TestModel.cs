@@ -1,6 +1,5 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using System.Collections.Generic;
 
 namespace BaoCaoHQTCSDL.Models
 {
@@ -19,6 +18,8 @@ namespace BaoCaoHQTCSDL.Models
         public ObjectId Category { get; set; }
 
         public string CategoryName { get; set; }
+
+        public int Total { get; set; }
     }
 
     public class UserModel
@@ -58,5 +59,14 @@ namespace BaoCaoHQTCSDL.Models
 
         [BsonElement("Name")]
         public string Name { get; set; }
+    }
+
+    public class FilterModel
+    {
+        public string SearchString { get; set; }
+
+        public int Start { get; set; }
+
+        public int End { get; set; }
     }
 }

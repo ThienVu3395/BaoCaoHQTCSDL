@@ -1,15 +1,19 @@
-﻿@using BaoCaoHQTCSDL.Models
-@model ProductModel
-@{
-    List<ProductModel> productList = ViewBag.Product;
+﻿@{
     ViewBag.Title = "Home Page";
-    ProductModel createProductModel = new ProductModel();
 }
 
 <div class="jumbotron">
     <h1>DEMO MÔN "CÁC HỆ QUẢN TRỊ CƠ SỞ DỮ LIỆU"</h1>
 </div>
 
+<div class="input-group mb-3">
+    <input type="text" 
+           class="form-control"
+           ng-model="SearchString"
+           placeholder="Product Name..." 
+           ng-keypress="$event.keyCode == 13 ? TimKiem() : return">
+</div>
+<br/>
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
@@ -35,6 +39,15 @@
         </tr>
     </tbody>
 </table>
+<ul uib-pagination total-items="bigTotalItems" 
+    ng-model="bigCurrentPage" 
+    max-size="maxSize" 
+    class="pagination-sm" 
+    items-per-page="itemsPerPage"
+    boundary-link-numbers="true"
+    ng-change="Pagination()"
+    rotate="false">
+</ul>
 
 <script type="text/ng-template" id="FormCRUD.html">
     @Html.Partial("~/Views/Home/FormCRUD.cshtml")

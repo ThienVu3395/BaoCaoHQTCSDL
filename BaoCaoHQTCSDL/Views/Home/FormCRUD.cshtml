@@ -30,7 +30,7 @@
     <div class="modal-body" id="modal-body">
         <div class="form-group">
             <label>Product Name:</label>
-            <input type="text" class="form-control" placeholder="Enter Product Name" ng-model="$ctrl.sp.ProductName">
+            <input type="text" class="form-control" placeholder="Enter Product Name" ng-model="$ctrl.sp.ProductName" ng-disabled="status == 1">
         </div>
 
         <div class="form-group">
@@ -38,6 +38,7 @@
             <select 
                     class="form-control" 
                     ng-model="Cate"
+                    ng-disabled="status == 1"
                     ng-options="item as item.Name for item in $ctrl.dsCate track by item.Id">
             </select>
         </div>

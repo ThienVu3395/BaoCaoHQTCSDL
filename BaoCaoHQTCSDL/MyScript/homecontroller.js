@@ -1,16 +1,27 @@
 ﻿(function () {
     angular.module("oamsapp")
         .controller("homecontroller",
-            ["$rootScope", "$document", "$scope", "$uibModal", "$timeout", "$element", "appSettings", "loginservice",
-                function ($rootScope, $document, $scope, $uibModal, $timeout, $element, appSettings, loginservice) {
-                    var $ctrl = this;
+            ["$rootScope", "$document", "$scope", "$uibModal","loginservice",
+                function ($rootScope, $document, $scope, $uibModal,loginservice) {
+                    $scope.maxSize = 5;
+                    $scope.bigCurrentPage = 1;
+                    $scope.itemsPerPage = 5;
+                    $scope.SearchString = null;
+                    $scope.Start = ($scope.bigCurrentPage - 1) * $scope.itemsPerPage;
 
                     GetDSSP();
 
                     function GetDSSP() {
-                        var resp = loginservice.getdata("API/QLSP/LayDSSP");
+                        let filter = {
+                            SearchString: $scope.SearchString,
+                            Start: $scope.Start,
+                            End: $scope.itemsPerPage,
+                        };
+                        var resp = loginservice.postdata("API/QLSP/LayDSSP", $.param(filter));
                         resp.then(function (response) {
                             $scope.dsSP = response.data;
+                            $scope.bigTotalItems = $scope.dsSP[0].Total;
+                            //console.log($scope.dsSP);
                         }
                             , function errorCallback(response) {
                                 console.log(response.data.message);
@@ -42,7 +53,6 @@
                         });
                         modalInstance.result.then(function (c) {
                             GetDSSP();
-
                         }, function () {
                             GetDSSP();
                         });
@@ -57,6 +67,16 @@
                             , function errorCallback(response) {
                                 alert("lỗi");
                             });
+                    }
+
+                    $scope.TimKiem = function () {
+                        $scope.Start = 0;
+                        GetDSSP();
+                    }
+
+                    $scope.Pagination = function () {
+                        $scope.Start = ($scope.bigCurrentPage - 1) * $scope.itemsPerPage;
+                        GetDSSP();
                     }
             }])
 }());

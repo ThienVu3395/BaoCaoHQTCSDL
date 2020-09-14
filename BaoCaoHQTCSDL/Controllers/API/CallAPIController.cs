@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Web.Http;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -32,34 +30,36 @@ namespace VuTest.Controllers.API
             userCollection = _dbcontext._database.GetCollection<UserModel>("User");
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("LayDSSP")]
-        public IHttpActionResult LayDSSP()
+        public IHttpActionResult LayDSSP(FilterModel model)
         {
             var collection = _dbcontext._database.GetCollection<ProductModel>("Product").AsQueryable().ToList();
             var collection2 = _dbcontext._database.GetCollection<CategoryModel>("Category").AsQueryable().ToList();
-            var result = from i in collection
+            var result = (from i in collection
                          join j in collection2 on i.Category equals j.Id
-                         where (i.Category == j.Id)
+                         where (model.SearchString == null || i.ProductName.Contains(model.SearchString))
                          select new
                          {
                              i.Id,
                              i.ProductID,
                              i.ProductName,
                              CategoryName = j.Name,
-                         };
+                         }).ToList();
             List<ProductModel> productList = new List<ProductModel>();
-            if (result.ToList().Count > 0)
+            if (result.Count > 0)
             {
-                foreach (var item in result.ToList())
+                foreach (var item in result)
                 {
                     ProductModel product = new ProductModel();
                     product.Id = item.Id;
                     product.ProductID = item.ProductID;
                     product.ProductName = item.ProductName;
                     product.CategoryName = item.CategoryName;
+                    product.Total = result.Count();
                     productList.Add(product);
                 }
+                return Ok(productList.Skip(model.Start).Take(model.End));
             }
             return Ok(productList);
         }
