@@ -2,8 +2,8 @@
     "use strict"
     angular.module("oamsapp")
         .controller("CrudCtrl",
-            ["$rootScope", "$scope", "idselect", "loginservice",
-                function ($rootScope, $scope, idselect, loginservice) {
+            ["$scope", "idselect", "loginservice",
+                function ($scope, idselect, loginservice) {
                     var $ctrl = this;
 
                     CheckTrangThai();

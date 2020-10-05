@@ -22,36 +22,6 @@ namespace BaoCaoHQTCSDL.Models
         public int Total { get; set; }
     }
 
-    public class UserModel
-    {
-        [BsonId]
-        public ObjectId Id { get; set; }
-
-        [BsonElement("Ten")]
-        public string Ten { get; set; }
-
-        [BsonElement("SoDienThoai")]
-        public string SoDienThoai { get; set; }
-
-        [BsonElement("NgaySinh")]
-        public string NgaySinh { get; set; }
-    }
-
-    public class OrderModel
-    {
-        [BsonElement("ProductID")]
-        public int ProductID { get; set; }
-
-        [BsonElement("UserID")]
-        public ObjectId UserID { get; set; }
-
-        [BsonElement("CreatedDate")]
-        public BsonDateTime CreatedDate { get; set; }
-
-        [BsonElement("Amount")]
-        public int Amount { get; set; }
-    }
-
     public class CategoryModel
     {
         [BsonId]

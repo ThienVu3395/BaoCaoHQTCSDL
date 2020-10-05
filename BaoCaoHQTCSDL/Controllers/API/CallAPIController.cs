@@ -17,17 +17,11 @@ namespace VuTest.Controllers.API
 
         private IMongoCollection<CategoryModel> categoryCollection;
 
-        private IMongoCollection<OrderModel> orderCollection;
-
-        private IMongoCollection<UserModel> userCollection;
-
         public CallAPIController()
         {
             _dbcontext = new MongoContext();
             productCollection = _dbcontext._database.GetCollection<ProductModel>("Product");
             categoryCollection = _dbcontext._database.GetCollection<CategoryModel>("Category");
-            orderCollection = _dbcontext._database.GetCollection<OrderModel>("Order");
-            userCollection = _dbcontext._database.GetCollection<UserModel>("User");
         }
 
         [HttpPost]

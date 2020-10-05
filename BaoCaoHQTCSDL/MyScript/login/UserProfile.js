@@ -1,6 +1,6 @@
 ﻿(function () {
     "use strict"
-    angular.module("aims.service", ['ngAnimate', 'ui.bootstrap', 'ngSanitize'])
+    angular.module("aims.service", ['ui.bootstrap'])
         .constant("appSettings", Settings)
         .factory("loginservice", ["appSettings","$http",
             function (appSettings,$http) {
